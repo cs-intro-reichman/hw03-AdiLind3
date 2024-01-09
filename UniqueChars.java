@@ -12,6 +12,17 @@ public class UniqueChars {
      */
     public static String uniqueChars(String s) {
         // Replace the following statement with your code
-        return null;
+        int size = s.length();
+        String finalString = "";
+        for(int i = 0; i<size ; i++)
+        {
+            char temp = s.charAt(i);
+            if ((temp == ' ') || (finalString.indexOf(String.valueOf(temp)) == -1))
+            {
+                finalString = finalString + temp;  
+            }
+
+        }
+        return finalString;
     }
 }
