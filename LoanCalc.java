@@ -23,13 +23,15 @@ public class LoanCalc {
 		System.out.printf("%.2f", bruteForceSolver(loan, rate, n, epsilon));
 		System.out.println();
 		System.out.println("number of iterations: " + iterationCounter);
-
 		// Computes the periodical payment using bisection search
+		 
 		System.out.print("Periodical payment, using bi-section search: ");
 		System.out.printf("%.2f", bisectionSolver(loan, rate, n, epsilon));
 		System.out.println();
 		System.out.println("number of iterations: " + iterationCounter);
+		
 	}
+
 	
 	/**
 	* Uses a sequential search method  ("brute force") to compute an approximation
@@ -40,7 +42,16 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
-    	return 0;
+		double g = loan/n;
+		iterationCounter=0;
+		double increment = epsilon;
+		while(endBalance(loan, rate, n, g) >= 0)
+		{
+			g = g+ increment;
+			iterationCounter++;
+		}
+
+    	return g;
     }
     
     /**
@@ -52,7 +63,26 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
-    	return 0;
+		double high = loan;
+		double low = loan/n;
+		double initialGuess = (high + low) / 2;
+		iterationCounter = 0;
+		while( (high - low) >= epsilon)
+		{
+			if (endBalance(loan, rate, n, initialGuess) * endBalance(loan, rate, n, low) > 0)
+			{
+				low = initialGuess;
+			}
+			else 
+			{
+				high = initialGuess;
+			}
+			iterationCounter++;
+			initialGuess = (low + high)/2;
+			//System.out.println("correct intial in the loop is  " + initialGuess);
+			//System.out.println("correct endbalance is " + endBalance(loan, rate, n, initialGuess));
+		}
+    	return initialGuess;
     }
 	
 	/**
@@ -60,7 +90,10 @@ public class LoanCalc {
 	* interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
-		// Replace the following statement with your code
-    	return 0;
+		for ( int i = 0 ; i <= n-1 ; i++)
+		{
+			loan = (loan - payment) * (1 + (rate / 100));
+		}
+    	return loan;
 	}
 }
