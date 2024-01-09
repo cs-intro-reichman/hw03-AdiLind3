@@ -12,6 +12,23 @@ public class LowerCase {
     */
     public static String lowerCase(String s) {
         // Replace the following statement with your code
-        return null;
+        int size = s.length();
+        String newS = ""; //make the new s we get but without Upper-case.
+        for(int i = 0 ; i < size; i++)
+        {
+            char temp = s.charAt(i);
+            if (temp >= 65 && temp <= 90) // the ascii code of upper
+            {
+                temp = (char) (temp + 32) ;
+                newS = newS + temp;
+            }
+            else 
+            {
+                newS = newS + temp;
+            }
+            
+        }
+
+        return newS;
     }
 }
