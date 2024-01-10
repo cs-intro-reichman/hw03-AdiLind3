@@ -54,22 +54,17 @@ public class Calendar1 {
 	 private static void advance() {
 		// Replace this comment with your code
 		
-
-		if(dayOfMonth == nDaysInMonth(month, year))
-		{
+		if (dayOfMonth == nDaysInMonth(month, year)) {
 			month++;
-			dayOfMonth = 0;
-		}
-			if( month > 12)
-			{
+			dayOfMonth = 1;
+			if (month > 12) {
 				month = 1;
 				year++;
 			}
-		else
-		{
+		} else {
 			dayOfMonth++;
 		}
-		dayOfWeek = ( dayOfWeek +1 ) % 7; //add one for the day and save the format of 7 days per week
+		dayOfWeek = (dayOfWeek + 1) % 7; //add one for the day and save the format of 7 days per week
 	 } 
 		 
     // Returns true if the given year is a leap year, false otherwise.
